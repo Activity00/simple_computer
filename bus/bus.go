@@ -36,10 +36,10 @@ func NewBus() *Bus {
 		bus.ContrWires[i] = *circuit.NewWire("contr_"+string(i), false)
 	}
 
-	bus.arbiter = NewArbiter()
-	bus.masterMux = NewMasterMux()
-	bus.slaveMux = NewSlaveMux()
-	bus.addrDec = NewAddrDec()
+	bus.arbiter = NewArbiter(bus)
+	bus.masterMux = NewMasterMux(bus)
+	bus.slaveMux = NewSlaveMux(bus)
+	bus.addrDec = NewAddrDec(bus)
 	return bus
 }
 

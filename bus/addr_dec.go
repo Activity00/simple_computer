@@ -4,6 +4,6 @@ package bus
 type AddrDec struct {
 }
 
-func NewAddrDec() *AddrDec {
+func NewAddrDec(bus *Bus) *AddrDec {
 	return &AddrDec{}
 }

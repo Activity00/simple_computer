@@ -3,7 +3,7 @@ package bus
 /**
 总线仲裁器：对总线使用权进行调停
 
-功能：接收总线主控发来的总线使用权请求，并且将使用权赋给合适的总线主控该模块总线仲裁器针对四个总线主控法来的请求进行调停。
+功能：接收总线主控发来的总线使用权请求，并且将使用权赋给合适的总线主控该模块总线仲裁器针对四个总线主控发来的请求进行调停。
 
 实现原理：总线仲裁器根据目前所有者状态，按照有限状态机方式进行控制。总线状态机有四个状态，分别是
 		 0号总线主控持有总线使用权， 1号总线主控持有总线使用权， 2号总线主控持有总线使用权，3号总线主控持有总线使用权
@@ -15,14 +15,17 @@ type Arbiter struct {
 	m1Grant bool
 	m2Grant bool
 	m3Grant bool
+
+	bus *Bus
 }
 
-func NewArbiter() *Arbiter {
+func NewArbiter(bus *Bus) *Arbiter {
 	biter := new(Arbiter)
 	biter.m0Grant = false
 	biter.m1Grant = false
 	biter.m2Grant = false
 	biter.m3Grant = false
+	biter.bus = bus
 	return biter
 }
 

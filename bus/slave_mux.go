@@ -3,6 +3,6 @@ package bus
 type SlaveMux struct {
 }
 
-func NewSlaveMux() *SlaveMux {
+func NewSlaveMux(bus *Bus) *SlaveMux {
 	return &SlaveMux{}
 }

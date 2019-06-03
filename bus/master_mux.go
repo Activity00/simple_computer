@@ -3,6 +3,6 @@ package bus
 type MasterMux struct {
 }
 
-func NewMasterMux() *MasterMux {
+func NewMasterMux(bus *Bus) *MasterMux {
 	return &MasterMux{}
 }
