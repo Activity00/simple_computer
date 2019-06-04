@@ -1,6 +1,9 @@
 package main
 
+import "./bus"
+
 func main() {
-	println(1 & 9)
+	bs := bus.NewBus()
+	bs.SyncClockWire(false)
 
 }

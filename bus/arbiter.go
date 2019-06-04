@@ -1,5 +1,7 @@
 package bus
 
+import "../circuit"
+
 /**
 总线仲裁器：对总线使用权进行调停
 
@@ -11,22 +13,21 @@ package bus
 **/
 
 type Arbiter struct {
-	m0Grant bool
-	m1Grant bool
-	m2Grant bool
-	m3Grant bool
-
-	bus *Bus
+	masterGrant []circuit.Wire
+	bus         *Bus
 }
 
 func NewArbiter(bus *Bus) *Arbiter {
 	biter := new(Arbiter)
-	biter.m0Grant = false
-	biter.m1Grant = false
-	biter.m2Grant = false
-	biter.m3Grant = false
 	biter.bus = bus
+	for i := uint8(0); i < MasterCh; i++ {
+		biter.masterGrant[i] = *circuit.NewWire("mGrant"+string(i), false)
+	}
 	return biter
+}
+
+func (biter *Arbiter) arbitrate(master *circuit.Master, value bool) {
+	master.GrandSuccess()
 }
 
 func (biter *Arbiter) update(owner int) {

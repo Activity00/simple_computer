@@ -11,4 +11,8 @@ type Computer struct {
 
 	screenChannel chan *[160][240]byte
 	quitChannel   chan bool
+
+
+	bus = NewBus()
+	cpu1 = CPU(bus)
 }
