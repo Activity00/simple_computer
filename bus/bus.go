@@ -2,7 +2,7 @@ package bus
 
 import (
 	"../circuit"
-	"fmt"
+	"../utils"
 )
 
 const AddrWidth int = 30 // 地址总线位宽
@@ -15,7 +15,7 @@ type Bus struct {
 	// 控制总线
 	clkWire   circuit.Wire   // 同步信号
 	reqWires  []circuit.Wire // 请求总线使用权
-	grantWire circuit.Wire   // 总线使用许可信号
+	grantWire []circuit.Wire // 总线使用许可信号
 	csWire    circuit.Wire   // 从属访问选择信号
 	asWire    circuit.Wire   // 访问有效表示信号
 	rwWire    circuit.Wire   // 访问方式表示信号
@@ -26,7 +26,7 @@ type Bus struct {
 	rdDataWires []circuit.Wire // 读取数据
 	wrDataWires []circuit.Wire // 写入数据
 
-	masters map[uint8]*circuit.Master // 主控
+	masters map[uint8]*utils.Master // 主控
 
 	arbiter   *Arbiter //总线仲裁器
 	masterMux *MasterMux
@@ -38,10 +38,10 @@ func NewBus() *Bus {
 	bus := new(Bus)
 
 	bus.clkWire = *circuit.NewWire("clk", false)
-	for i := uint8(0); i < MasterCh; i++ {
-		bus.reqWires[i] = *circuit.NewWire("req", false)
-	}
-	bus.grantWire = *circuit.NewWire("grant", false)
+	//for i := uint8(0); i < MasterCh; i++ {
+	//	bus.reqWires[i] = *circuit.NewWire("req", false)
+	//}
+
 	bus.csWire = *circuit.NewWire("cs", false)
 	bus.asWire = *circuit.NewWire("as", false)
 	bus.rwWire = *circuit.NewWire("rw", false)
@@ -67,23 +67,9 @@ func NewBus() *Bus {
 	return bus
 }
 
-// 注册主控
-func (bus *Bus) RegisterMaser(index uint8, master *circuit.Master) {
-	if index >= MasterCh {
-		fmt.Println("注册主控失败，超出最大主控限制:", MasterCh)
-		return
-	}
-	bus.masters[index] = master
-}
-
 // 同步信号
 func (bus *Bus) SyncClockWire(value bool) {
 	bus.clkWire.Update(value)
-}
-
-// 仲裁信号
-func (bus *Bus) ArbitrateWire(master *circuit.Master, value bool) {
-	bus.arbiter.arbitrate(master, value)
 }
 
 // 总线主控输出信号
