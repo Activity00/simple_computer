@@ -1,0 +1,4 @@
+github.com/djhworld/simple-computer v0.0.0-20190521193537-cc98793ff17a h1:CaPWGF8wddtsrFU+u18Sjnrda+ENElo5BkvVczS/EU8=
+github.com/djhworld/simple-computer v0.0.0-20190521193537-cc98793ff17a/go.mod h1:yxtpceoPKvYIT+Ioj5+3lzKRMhqLQuNmPzv5bQA3kyI=
+github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7/go.mod h1:482civXOzJJCPzJ4ZOX/pwvXBWSnzD4OKMdH4ClKGbk=
+github.com/go-gl/glfw v0.0.0-20190409004039-e6da0acd62b1/go.mod h1:vR7hzQXu2zJy9AVAgeJqvqgH9Q5CA+iKCZ2gyEVpxRU=
