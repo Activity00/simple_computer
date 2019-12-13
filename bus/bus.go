@@ -34,7 +34,7 @@ type Bus struct {
 	addrDec   *AddrDec
 }
 
-func NewBus() *Bus {
+func NewBus(width int) *Bus {
 	bus := new(Bus)
 
 	bus.clkWire = *circuit.NewWire("clk", false)

@@ -1,7 +1,10 @@
 package main
 
+import "simple_computer/computer"
+
 func main() {
-	var a int
-	a = 1
-	println(a)
+	screenChannel := make(chan *[160][240]byte)
+	quitChannel := make(chan bool, 10)
+	simpleComputer := computer.NewComputer(screenChannel, quitChannel)
+	simpleComputer.PowerUp()
 }
